@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      td {
+        border: 1px solid black;
+
+      }
+      td:hover{
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="table-container"></div>
+
+    <script>
+      function getCellValue(event, el) {
+        console.log(el.textContent);
+      }
+
+      function makeTable() {
+        var rowOpen = "<tr>";
+        var rowClose = "</tr>";
+        var cellOpen = '<td onclick="getCellValue(event, this)">';
+        var cellClose = "</td>";
+        var tableOpen = "<table>";
+        var tableClose = "</table>";
+        var tableContainer = "";
+
+        tableContainer += tableOpen;
+
+        for (i = 1; i <= 10; i++) {
+          tableContainer += rowOpen;
+          for (j = 1; j <= 10; j++) {
+            tableContainer += cellOpen + i * j + cellClose;
+          }
+          tableContainer += rowClose;
+        }
+        tableContainer += tableClose;
+
+        return tableContainer;
+      }
+
+      document.getElementById("table-container").innerHTML = makeTable();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      td {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="table-container"></div>
+    <script>
+      class Table {
+        constructor(height, width) {
+          this.height = height;
+          this.width = width;
+          this._tableContainer = "";
+        }
+
+        makeTable() {
+          var rowOpen = "<tr>";
+          var rowClose = "</tr>";
+          var cellOpen = '<td class="cellValue">';
+          var cellClose = "</td>";
+          var tableOpen = "<table>";
+          var tableClose = "</table>";
+          var tableContainer = "";
+
+          tableContainer += tableOpen;
+          for (let i = 1; i <= this.height; i++) {
+            tableContainer += rowOpen;
+            for (let j = 1; j <= this.width; j++) {
+              tableContainer += cellOpen + i * j + cellClose;
+            }
+            tableContainer += rowClose;
+          }
+          tableContainer += tableClose;
+
+          this._tableContainer = tableContainer;
+        }
+
+        drawTable(rootNode) {
+          rootNode.innerHTML = this._tableContainer;
+          rootNode.addEventListener("click", (el) => {
+            console.log(el.target.textContent);
+          });
+        }
+      }
+
+      let rootNode = document.getElementById("table-container");
+      let table1 = new Table(10, 10);
+      table1.makeTable();
+      table1.drawTable(rootNode);
+    </script>
+  </body>
+</html>
